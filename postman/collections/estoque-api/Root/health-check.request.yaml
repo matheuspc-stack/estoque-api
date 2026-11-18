@@ -1,0 +1,19 @@
+$kind: http-request
+name: 'Health Check'
+description: |-
+  Verifica se o servidor está no ar.
+  Retorna uma mensagem de boas-vindas com o nome configurado na variável de ambiente `nome`.
+method: GET
+url: '{{baseUrl}}/'
+order: 1000
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status 200 OK", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Resposta contém texto", function () {
+          pm.expect(pm.response.text()).to.be.a('string').and.not.empty;
+      });

@@ -1,0 +1,10 @@
+$kind: collection
+name: Estoque API
+description: |-
+  Coleção para a API de controle de estoque (estoque-api).
+  Servidor Express rodando na porta 3000.
+  Configure a variável `baseUrl` com o endereço do servidor, por exemplo: http://localhost:3000
+variables:
+  - key: baseUrl
+    value: 'http://localhost:3000'
+    description: URL base do servidor Express
