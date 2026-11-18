@@ -1,0 +1,30 @@
+$kind: http-request
+name: 'Criar Produto'
+description: |-
+  Cria um novo produto no estoque.
+  Retorna uma mensagem de confirmação quando o produto é criado com sucesso.
+method: POST
+url: '{{baseUrl}}/produtos'
+order: 1000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "nome": "Produto Exemplo",
+      "quantidade": 10,
+      "preco": 29.99
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Produto criado com sucesso", function () {
+          pm.response.to.have.status(200);
+      });
+
+      pm.test("Resposta confirma criação", function () {
+          pm.expect(pm.response.text()).to.include("criado");
+      });
